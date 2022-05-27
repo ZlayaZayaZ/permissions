@@ -86,8 +86,11 @@ class FavoritesAdvertisementViewSet(ModelViewSet):
         list_int = re.findall('\d+', link)
         id_adv = list_int[-1]
 
-        FavoritesAdvertisement.objects.filter(advertisement=id_adv).delete()
+        fav_adv = FavoritesAdvertisement.objects.filter(advertisement=id_adv)
+        if len(fav_adv) != 0:
+            fav_adv.delete()
+            return Response({'status': 'Объявление удалено из списка избранных'})
 
-        return Response({'status': 'Объявление удалено из списка избранных'})
+        return Response({'status': 'Объявление не было найдено'})
 
 
