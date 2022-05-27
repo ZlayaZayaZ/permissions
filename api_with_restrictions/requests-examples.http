@@ -1,0 +1,100 @@
+# примеры API-запросов
+
+@baseUrl = http://localhost:8000/api
+
+# получение объявлений
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token a6ce86af6116801e5e345b56945afffbe98a56cc
+
+###
+
+# создание объявления
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token b6aaf3b44bb080985eb29a8d086dc4fc1ef1eded
+
+{
+  "title": "Квартира",
+  "description": "В Стамбуле",
+  "draft": "true"
+}
+
+###
+
+# попытка поменять объявление
+PATCH {{baseUrl}}/advertisements/10/
+Content-Type: application/json
+Authorization: Token a6ce86af6116801e5e345b56945afffbe98a56cc
+
+{
+  "status": "CLOSED"
+}
+
+###
+
+# удаление выбранного объявления
+DELETE {{baseUrl}}/advertisements/8/
+Content-Type: application/json
+Authorization: Token b6aaf3b44bb080985eb29a8d086dc4fc1ef1eded
+
+###
+
+# фильтрация по создателю
+GET {{baseUrl}}/advertisements/?creator=2
+Content-Type: application/json
+Authorization: Token a6ce86af6116801e5e345b56945afffbe98a56cc
+
+###
+
+# фильтрация по статусу
+GET {{baseUrl}}/advertisements/?status=CLOSED
+Content-Type: application/json
+
+###
+
+# фильтрация по дате
+GET {{baseUrl}}/advertisements/?created_at_before=2022-05-18
+Content-Type: application/json
+
+###
+
+# добавление объявления в избранное
+POST {{baseUrl}}/favorite/
+Content-Type: application/json
+Authorization: Token b6aaf3b44bb080985eb29a8d086dc4fc1ef1eded
+
+{
+  "advertisement": 5
+}
+
+###
+
+# удаление объявления из избранного
+
+DELETE {{baseUrl}}/favorite/5/
+Content-Type: application/json
+Authorization: Token b6aaf3b44bb080985eb29a8d086dc4fc1ef1eded
+
+###
+
+# просмотр избранных объявлений без деталей
+GET {{baseUrl}}/favorite/
+Content-Type: application/json
+Authorization: Token b6aaf3b44bb080985eb29a8d086dc4fc1ef1eded
+
+###
+
+# просмотр избранных объявлений с деталями
+GET {{baseUrl}}/advertisements/get_fav_queryset/
+Content-Type: application/json
+Authorization: Token b6aaf3b44bb080985eb29a8d086dc4fc1ef1eded
+
+###
+
+# фильтрация избранных объявлений по статусу
+GET {{baseUrl}}/advertisements/get_fav_queryset/?status=CLOSED
+Content-Type: application/json
+Authorization: Token b6aaf3b44bb080985eb29a8d086dc4fc1ef1eded
+
+
